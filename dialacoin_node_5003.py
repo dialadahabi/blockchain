@@ -157,6 +157,7 @@ def add_transaction():
 @app.route('/connect_node', methods = ['POST'])
 def connect_node():
     json = request.get_json()
+    nodes = json.get('nodes')
     json.get('nodes')
     if nodes is None:
         return "No node", 400
@@ -164,8 +165,7 @@ def connect_node():
         blockchain.add_node(node)
     response = {'message':'All the nodes are now connected. The Diala Blockchain now contains the following nodes:'
         , 'total_nodes': list(blockchain.nodes)}
-    return jsonify(reponse), 201
-
+    return jsonify(response), 201
 # Replace chain by longest chain if needed
 
 @app.route('/replace_chain', methods = ['GET'])
