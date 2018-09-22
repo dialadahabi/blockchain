@@ -41,4 +41,11 @@ contract dialacoin_ico {
         equity_usd[investor] += equity_dialacoins[investor] / usd_to_dialacoins;
         total_dialacoins_bought += dialacoins_bought;
     }
+    
+    // Sell Dialacoins
+    function sell_dialacoins(address investor, uint dialacoins_to_sell) external {
+        equity_dialacoins[investor] -= dialacoins_to_sell;
+        equity_usd[investor] = equity_dialacoins[investor] / usd_to_dialacoins;
+        total_dialacoins_bought -= dialacoins_to_sell;
+    }
 }
