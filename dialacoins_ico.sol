@@ -23,11 +23,22 @@ contract dialacoin_ico {
     
     // Getting the equity in Dialacoins of an investor.
     function equity_in_dialacoins(address investor) external constant returns (uint) {
+        // Mapping
         return equity_dialacoins[investor];
     }
     
     // Getting the equity in USD of an investor.
      function equity_in_usd(address investor) external constant returns (uint) {
+        // Mapping
         return equity_usd[investor];
+    }
+    
+    // Buy Dialacoins
+    function buy_dialacoins(address investor, uint usd_invested) external 
+    can_buy_dialacoins(usd_invested) {
+        uint dialacoins_bought = usd_invested * usd_to_dialacoins;
+        equity_dialacoins[investor] += dialacoins_bought;
+        equity_usd[investor] += equity_dialacoins[investor] / usd_to_dialacoins;
+        total_dialacoins_bought += dialacoins_bought;
     }
 }
